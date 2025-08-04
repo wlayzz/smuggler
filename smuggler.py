@@ -255,6 +255,16 @@ class Desyncr():
 					dismsg = Fore.RED + "Potential CLTE Issue Found" + Fore.MAGENTA + " - " + Fore.CYAN + self._method + Fore.MAGENTA + " @ " + Fore.CYAN + ["http://","https://",][self.ssl_flag]+ self._host + self._endpoint + Fore.MAGENTA + " - " + Fore.CYAN + self._configfile.split('/')[-1] + "\n"
 					pretty_print(name, dismsg)
 					
+					# Print detailed request and response information
+					print(Fore.YELLOW + "\n=== REQUEST ===" + Style.RESET_ALL)
+					print(str(clte_res[2]))
+					print(Fore.YELLOW + "\n=== RESPONSE ===" + Style.RESET_ALL)
+					if clte_res[1]:
+						print(clte_res[1])
+					else:
+						print("No response received (timeout)")
+					print(Fore.YELLOW + "===============\n" + Style.RESET_ALL)
+					
 					# Write payload out to file
 					write_payload(self._host, clte_res[2], "CLTE")
 					self._attempts = 0
@@ -278,6 +288,16 @@ class Desyncr():
 					#print (tecl_res2[1])
 					dismsg = Fore.RED + "Potential TECL Issue Found" + Fore.MAGENTA + " - " + Fore.CYAN + self._method + Fore.MAGENTA + " @ " + Fore.CYAN + ["http://","https://",][self.ssl_flag]+ self._host + self._endpoint + Fore.MAGENTA + " - " + Fore.CYAN + self._configfile.split('/')[-1] + "\n"
 					pretty_print(name, dismsg)
+					
+					# Print detailed request and response information
+					print(Fore.YELLOW + "\n=== REQUEST ===" + Style.RESET_ALL)
+					print(str(tecl_res[2]))
+					print(Fore.YELLOW + "\n=== RESPONSE ===" + Style.RESET_ALL)
+					if tecl_res[1]:
+						print(tecl_res[1])
+					else:
+						print("No response received (timeout)")
+					print(Fore.YELLOW + "===============\n" + Style.RESET_ALL)
 					
 					# Write payload out to file
 					write_payload(self._host, tecl_res[2], "TECL")
